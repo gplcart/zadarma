@@ -31,7 +31,6 @@ class Zadarma extends Module
      */
     public function hookRouteList(array &$routes)
     {
-        // Module settings page
         $routes['admin/module/settings/zadarma'] = array(
             'access' => 'module_edit',
             'handlers' => array(
