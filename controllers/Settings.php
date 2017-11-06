@@ -52,7 +52,7 @@ class Settings extends BackendController
         $this->setBreadcrumbEditSettings();
 
         $this->setData('triggers', $this->trigger->getList());
-        $this->setData('settings', $this->config->module('zadarma'));
+        $this->setData('settings', $this->config->getFromModule('zadarma'));
 
         $this->submitSettings();
         $this->outputEditSettings();

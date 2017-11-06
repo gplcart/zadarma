@@ -9,7 +9,8 @@
 
 namespace gplcart\modules\zadarma;
 
-use gplcart\core\Module;
+use gplcart\core\Module,
+    gplcart\core\Config;
 
 /**
  * Main class for Zadarma module
@@ -18,11 +19,11 @@ class Zadarma extends Module
 {
 
     /**
-     * Constructor
+     * @param Config $config
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        parent::__construct();
+        parent::__construct($config);
     }
 
     /**
@@ -45,7 +46,7 @@ class Zadarma extends Module
      */
     public function hookConstructControllerFrontend($controller)
     {
-        $settings = $this->config->module('zadarma');
+        $settings = $this->config->getFromModule('zadarma');
 
         if (!empty($settings['code'])//
                 && (empty($settings['trigger_id'])//
