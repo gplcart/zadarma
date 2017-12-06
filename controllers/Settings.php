@@ -9,8 +9,7 @@
 
 namespace gplcart\modules\zadarma\controllers;
 
-use gplcart\core\models\Module as ModuleModel,
-    gplcart\core\models\Trigger as TriggerModel;
+use gplcart\core\models\Trigger as TriggerModel;
 use gplcart\core\controllers\backend\Controller as BackendController;
 
 /**
@@ -26,20 +25,12 @@ class Settings extends BackendController
     protected $trigger;
 
     /**
-     * Module model instance
-     * @var \gplcart\core\models\Module $module
-     */
-    protected $module;
-
-    /**
-     * @param ModuleModel $module
      * @param TriggerModel $trigger
      */
-    public function __construct(ModuleModel $module, TriggerModel $trigger)
+    public function __construct(TriggerModel $trigger)
     {
         parent::__construct();
 
-        $this->module = $module;
         $this->trigger = $trigger;
     }
 
@@ -52,7 +43,7 @@ class Settings extends BackendController
         $this->setBreadcrumbEditSettings();
 
         $this->setData('triggers', $this->trigger->getList());
-        $this->setData('settings', $this->config->getFromModule('zadarma'));
+        $this->setData('settings', $this->module->getSettings('zadarma'));
 
         $this->submitSettings();
         $this->outputEditSettings();
@@ -63,8 +54,7 @@ class Settings extends BackendController
      */
     protected function setTitleEditSettings()
     {
-        $vars = array('%name' => $this->text('Zadarma'));
-        $title = $this->text('Edit %name settings', $vars);
+        $title = $this->text('Edit %name settings', array('%name' => $this->text('Zadarma')));
         $this->setTitle($title);
     }
 

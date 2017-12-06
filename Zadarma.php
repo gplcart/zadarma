@@ -9,21 +9,26 @@
 
 namespace gplcart\modules\zadarma;
 
-use gplcart\core\Module,
-    gplcart\core\Config;
+use gplcart\core\Module;
 
 /**
  * Main class for Zadarma module
  */
-class Zadarma extends Module
+class Zadarma
 {
 
     /**
-     * @param Config $config
+     * Module class instance
+     * @var \gplcart\core\Module $module
      */
-    public function __construct(Config $config)
+    protected $module;
+
+    /**
+     * @param Module $module
+     */
+    public function __construct(Module $module)
     {
-        parent::__construct($config);
+        $this->module = $module;
     }
 
     /**
@@ -56,7 +61,7 @@ class Zadarma extends Module
     protected function setModuleAssets($controller)
     {
         if (!$controller->isInternalRoute()) {
-            $settings = $this->config->getFromModule('zadarma');
+            $settings = $this->module->getSettings('zadarma');
             if (!empty($settings['code']) && (empty($settings['trigger_id']) || $controller->isTriggered($settings['trigger_id']))) {
                 $controller->setJs($settings['code'], array('position' => 'bottom', 'aggregate' => false));
             }
