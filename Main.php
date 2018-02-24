@@ -9,6 +9,7 @@
 
 namespace gplcart\modules\zadarma;
 
+use gplcart\core\controllers\frontend\Controller;
 use gplcart\core\Module;
 
 /**
@@ -47,18 +48,18 @@ class Main
 
     /**
      * Implements hook "construct.controller.frontend"
-     * @param \gplcart\core\controllers\frontend\Controller $controller
+     * @param Controller $controller
      */
-    public function hookConstructControllerFrontend($controller)
+    public function hookConstructControllerFrontend(Controller $controller)
     {
         $this->setModuleAssets($controller);
     }
 
     /**
      * Sets module specific assets
-     * @param \gplcart\core\controllers\frontend\Controller $controller
+     * @param Controller $controller
      */
-    protected function setModuleAssets($controller)
+    protected function setModuleAssets(Controller $controller)
     {
         if (!$controller->isInternalRoute()) {
             $settings = $this->module->getSettings('zadarma');
