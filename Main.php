@@ -62,9 +62,11 @@ class Main
     protected function setModuleAssets(Controller $controller)
     {
         if (!$controller->isInternalRoute()) {
+
             $settings = $this->module->getSettings('zadarma');
+
             if (!empty($settings['code']) && (empty($settings['trigger_id']) || $controller->isTriggered($settings['trigger_id']))) {
-                $controller->setJs($settings['code'], array('position' => 'bottom', 'aggregate' => false));
+                $controller->setJs($settings['code'], array('position' => 'bottom'));
             }
         }
     }
